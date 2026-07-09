@@ -1,0 +1,16 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "kept",
+  "description": "Kept — a personal OS (notes, tasks, calendar, goals, habits, focus) — for your AI agent: the Kept MCP server plus skills for using it well",
+  "owner": {
+    "name": "Kept",
+    "url": "https://kept.do"
+  },
+  "plugins": [
+    {
+      "name": "kept",
+      "source": "./",
+      "description": "Connect Kept — notes, tasks, calendar, goals, habits, and focus — to your agent over MCP, plus a skill that teaches Kept's fast-capture and daily-planning idioms"
+    }
+  ]
+}

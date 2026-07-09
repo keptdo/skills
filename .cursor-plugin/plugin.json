@@ -1,0 +1,21 @@
+{
+  "name": "kept",
+  "description": "Kept is a personal OS: notes, tasks, calendar, goals, habits, and focus. This plugin connects the Kept MCP server (capture, planning, semantic note search, the knowledge graph, calendar) and teaches your agent how to use it well.",
+  "author": {
+    "name": "Kept",
+    "url": "https://kept.do"
+  },
+  "keywords": [
+    "kept",
+    "mcp",
+    "notes",
+    "tasks",
+    "calendar",
+    "goals",
+    "habits",
+    "knowledge-graph",
+    "personal-os",
+    "productivity"
+  ],
+  "logo": "logo.svg"
+}

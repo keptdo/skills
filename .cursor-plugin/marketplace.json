@@ -1,0 +1,13 @@
+{
+  "name": "kept",
+  "owner": {
+    "name": "Kept"
+  },
+  "plugins": [
+    {
+      "name": "kept",
+      "source": "./",
+      "description": "Connect Kept — notes, tasks, calendar, goals, habits, and focus — to your agent over MCP, plus a skill that teaches Kept's fast-capture and daily-planning idioms"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+name: Validate plugin
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      # Not --strict: plugin.json deliberately omits "version" (SHA-versioned during
+      # beta), and the validator always warns on a missing version, which --strict
+      # would turn into a failure. Revisit when we start cutting semver releases.
+      - name: Validate marketplace + plugin
+        run: claude plugin validate .
