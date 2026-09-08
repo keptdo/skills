@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-09-08T09:30:36.378Z",
+  "pass": true,
+  "endpoint": "https://mcp.kept.do/mcp",
+  "sourceCommit": "d00d969e2abe0ed787c7b200c844f12d82457656",
+  "catalogSourceCommit": "32911df3b381b20963c974031edb9f4e4c1f3d06",
+  "catalogInputSHA256": {
+    "apps/mcp/src/tools/catalog.ts": "a856a7780d9e2a457c1791d21120b8b9884e44fff67072112e09c0bf3cae8448",
+    "apps/mcp/src/tools/catalog-extra.ts": "433ebb6ec8fa25bbcd039fe53082923084523ccb3351ba5060f65b98ac75051e",
+    "apps/mcp/src/tools/catalog-parity.ts": "5df239b586755248b10cbb961f1e8adb91c061d21ffe061d150804f5adae341d",
+    "apps/mcp/src/tools/catalog-jobs.ts": "fc6980f8768af0917c914b4110379d61114ad2c0229b0a6f0194c883dc5eb9f4",
+    "apps/mcp/src/tools/catalog-ranges.ts": "4bd647d0766b462b5c39648458abc656b6cfde87518ee916f9f691663314b034",
+    "apps/mcp/src/tools/registry.ts": "0cafab9b0b637b0bb4425168568a27ba2d743d0ff8cb1bc7be9fbd2391d6394f",
+    "apps/mcp/src/auth/scopes.ts": "499ef5f0f26448274b57fc930c118e3293b55fc0f2c575d564b2ccff7fc4bd0a",
+    "apps/mcp/README.md": "c5ea987ef1eb5d703aa63b447279f01f683934ad861bd3f3a283ddcbca051e85",
+    "apps/mcp/test/unit/catalog-complete.test.ts": "e8f611002981f9be5f6d632debb3493310160a2cfdb3b003f9c4b73ba6f830e0",
+    "apps/web/lib/marketing/agent-setup-prompt.ts": "2e2865873eab32d873b3a8a19ed0f3584bf40338680b18cf8c0f6c297cf51ff7",
+    "packages/shared/src/tool-manifest.mjs": "6d8c8d689c57f4ad869f6b49430233759f0eb42f5a30a79df21e4b53cf9e8779",
+    "packages/shared/src/habit-groups.ts": "30fec5a44a66d92fa5815ed69dacb55a2958699419aa04a7a1eb1dfab78757b4"
+  },
+  "defaultTools": 80,
+  "allSourceTools": 86,
+  "fullCatalogEnabled": false,
+  "descriptorSHA256": "ed535940ce656d3ed949a7f2f1b91ccae1de6674dbc9737482347ca57bc081e3",
+  "comparison": "Exact default tool names, descriptions, input schemas and annotations through MCP SDK1.29.0; no business tool calls.",
+  "authenticationBoundary": "Isolated managed synthetic account, normal DCR/CSRF/OTP consent/S256 exchange and loopback callback; documented generated test OTP, not a proof of real mail delivery.",
+  "grantedScope": "profile:read",
+  "ownTokensRevoked": true,
+  "revokedAccessHTTP": 401
+}

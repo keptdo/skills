@@ -1,0 +1,4437 @@
+{
+  "unpublished": false,
+  "surface": "consumer",
+  "endpoint": "https://mcp.kept.do/mcp",
+  "notEndpoint": "https://mcp.enterprise.kept.do/mcp",
+  "counts": {
+    "full": 86,
+    "default": 80
+  },
+  "gated": {
+    "cloudAgentsMcp": {
+      "env": "FEATURE_CLOUD_AGENTS_MCP",
+      "enabledValue": "1",
+      "hiddenAs": "unknown_tool",
+      "tools": [
+        "kept_create_job",
+        "kept_get_job",
+        "kept_get_run_events",
+        "kept_list_jobs",
+        "kept_submit_approval"
+      ]
+    },
+    "selfKnowledge": {
+      "flag": "feature.selfKnowledge",
+      "tool": "kept_search_docs",
+      "scope": "profile:read",
+      "hiddenAs": "unknown_tool"
+    }
+  },
+  "scopes": {
+    "healthRead": "health:read",
+    "healthReadInOneClickPresets": false,
+    "cloudAgentsAdvertised": false,
+    "cloudAgentsInDefaultGrant": false
+  },
+  "deletion": {
+    "mcpDeleteTools": false,
+    "accountDeletion": "Kept iOS/Mac Settings → Delete account only"
+  },
+  "assistantMcpParity": {
+    "getNow": "kept_get_now",
+    "prioritizeDay": "kept_prioritize_day",
+    "getBriefing": "kept_get_briefing",
+    "readDailyNote": "kept_read_daily_note",
+    "appendDailyNote": "kept_append_daily_note",
+    "recallMemories": "kept_recall",
+    "searchNotesSemantic": "kept_search_notes_semantic",
+    "notesAbout": "kept_notes_about",
+    "relatedToNote": "kept_related_notes",
+    "decisionsAbout": "kept_decisions_about",
+    "getWeightTrend": "kept_get_weight_trend",
+    "getSleepRange": "kept_get_sleep_range",
+    "getMoodRange": "kept_get_mood_range",
+    "getHabitHistory": "kept_get_habit_history",
+    "updateHabit": "kept_update_habit",
+    "findHabitGroups": "kept_list_habit_groups",
+    "createHabitGroup": "kept_create_habit_group",
+    "updateHabitGroup": "kept_update_habit_group",
+    "reorderHabitGroups": "kept_reorder_habit_groups",
+    "getMetricSeries": "kept_get_metric_series",
+    "searchTasks": "kept_search_tasks",
+    "findFreeSlots": "kept_find_free_slots",
+    "getEventGuests": "kept_get_event_guests",
+    "readNoteBlocks": "kept_note_blocks_read",
+    "editNoteBlocks": "kept_note_blocks_edit"
+  },
+  "assignedToMcpToolNames": [
+    "kept_assign_task",
+    "kept_list_asks",
+    "kept_update_ask"
+  ],
+  "habitGroupTools": [
+    "kept_list_habit_groups",
+    "kept_create_habit_group",
+    "kept_update_habit_group",
+    "kept_reorder_habit_groups"
+  ],
+  "source": {
+    "commit": "32911df3b381b20963c974031edb9f4e4c1f3d06",
+    "filesMatchCommit": true,
+    "note": "Every catalog input matches this commit; deployed discovery is verified separately.",
+    "files": {
+      "apps/mcp/src/tools/catalog.ts": "a856a7780d9e2a457c1791d21120b8b9884e44fff67072112e09c0bf3cae8448",
+      "apps/mcp/src/tools/catalog-extra.ts": "433ebb6ec8fa25bbcd039fe53082923084523ccb3351ba5060f65b98ac75051e",
+      "apps/mcp/src/tools/catalog-parity.ts": "5df239b586755248b10cbb961f1e8adb91c061d21ffe061d150804f5adae341d",
+      "apps/mcp/src/tools/catalog-jobs.ts": "fc6980f8768af0917c914b4110379d61114ad2c0229b0a6f0194c883dc5eb9f4",
+      "apps/mcp/src/tools/catalog-ranges.ts": "4bd647d0766b462b5c39648458abc656b6cfde87518ee916f9f691663314b034",
+      "apps/mcp/src/tools/registry.ts": "0cafab9b0b637b0bb4425168568a27ba2d743d0ff8cb1bc7be9fbd2391d6394f",
+      "apps/mcp/src/auth/scopes.ts": "499ef5f0f26448274b57fc930c118e3293b55fc0f2c575d564b2ccff7fc4bd0a",
+      "apps/mcp/README.md": "c5ea987ef1eb5d703aa63b447279f01f683934ad861bd3f3a283ddcbca051e85",
+      "apps/mcp/test/unit/catalog-complete.test.ts": "e8f611002981f9be5f6d632debb3493310160a2cfdb3b003f9c4b73ba6f830e0",
+      "apps/web/lib/marketing/agent-setup-prompt.ts": "2e2865873eab32d873b3a8a19ed0f3584bf40338680b18cf8c0f6c297cf51ff7",
+      "packages/shared/src/tool-manifest.mjs": "6d8c8d689c57f4ad869f6b49430233759f0eb42f5a30a79df21e4b53cf9e8779",
+      "packages/shared/src/habit-groups.ts": "30fec5a44a66d92fa5815ed69dacb55a2958699419aa04a7a1eb1dfab78757b4"
+    }
+  },
+  "tools": [
+    {
+      "name": "kept_get_today",
+      "title": "Get the day's snapshot",
+      "description": "Read the user's day at a glance for a date: events, habits with done state, the day's plan, sleep and mood. The one-call context block for grounding any day-specific answer.",
+      "requiredScopes": [
+        "plan:read"
+      ],
+      "annotations": {
+        "title": "Get the day's snapshot",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "The day to read, YYYY-MM-DD"
+          }
+        },
+        "required": [
+          "date"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_tasks",
+      "title": "List open tasks",
+      "description": "List the user's open (not done) tasks, optionally filtered to one life area. Returns up to 50, soonest-due first.",
+      "requiredScopes": [
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "List open tasks",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "area": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A life-area label to filter by, or omit for all"
+          },
+          "assignee": {
+            "type": "string",
+            "enum": [
+              "owner",
+              "this_client",
+              "any"
+            ],
+            "default": "any"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_asks",
+      "title": "List this app's asks",
+      "description": "List the asks this connected app made, including open, answered, sent-back, and withdrawn state plus any sent-back reason.",
+      "requiredScopes": [
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "List this app's asks",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "open",
+              "answered",
+              "sent_back",
+              "withdrawn"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_search_notes",
+      "title": "Search notes",
+      "description": "Full-text search the user's notes. Use to answer 'what did I write about…' and to ground answers in the user's own words. For meaning-shaped queries ('the pricing decision'), prefer kept_search_notes_semantic.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Search notes",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Search text"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_read_note",
+      "title": "Read a note",
+      "description": "Read one of the user's notes in full by id, including tasks linked to it (find the note first with kept_search_notes).",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Read a note",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Note id from kept_search_notes"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_goals",
+      "title": "List goals",
+      "description": "List the user's active life goals. grounded_progress is their declared fraction or null; progress and metric_source retain the stored value and its source, not proof of measured achievement.",
+      "requiredScopes": [
+        "goals:read"
+      ],
+      "annotations": {
+        "title": "List goals",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_goal",
+      "title": "Get a goal",
+      "description": "Read one life goal by id, with its linked habits. grounded_progress is its declared fraction or null; a stored progress number with another metric_source is not a declaration or proof of achievement.",
+      "requiredScopes": [
+        "goals:read"
+      ],
+      "annotations": {
+        "title": "Get a goal",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_habits",
+      "title": "List habits",
+      "description": "List the user's active habits with their cue, target and minimum actions, cadence, recovery and review design, provenance, and calendar placement.",
+      "requiredScopes": [
+        "habits:read"
+      ],
+      "annotations": {
+        "title": "List habits",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_habit_groups",
+      "title": "List habit groups",
+      "description": "List the user's habit groups. Defaults to active groups; pass include_archived to include archived ones. Groups are optional labels distinct from part of day.",
+      "requiredScopes": [
+        "habits:read"
+      ],
+      "annotations": {
+        "title": "List habit groups",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "include_archived": {
+            "type": "boolean",
+            "description": "When true, include archived groups. Default is active groups only."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_areas",
+      "title": "List life areas",
+      "description": "List the user's declared life areas (key + label), so a caller can route new items to the right area.",
+      "requiredScopes": [
+        "profile:read"
+      ],
+      "annotations": {
+        "title": "List life areas",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_calendars",
+      "title": "List calendars",
+      "description": "List the user's connected, writable calendars (id, name, purpose) so an event can be routed to the most relevant one.",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "List calendars",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_check_calendar",
+      "title": "Check the calendar",
+      "description": "Read the user's events in a date range — to avoid conflicts before scheduling, or to find an event id before editing.",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "Check the calendar",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_search_events",
+      "title": "Search events by name",
+      "description": "Find a calendar event by NAME (fuzzy — handles typos and partial titles). Use to answer 'when is X' or to find an event id when you only know its name, instead of guessing a date and scanning with kept_check_calendar. Returns the best matches with their date and time; an empty result means it isn't on the synced calendar (say so rather than inventing a date).",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "Search events by name",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The event name or a fragment of it"
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional lower-bound date"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional upper-bound date"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_recall",
+      "title": "Recall from memory",
+      "description": "Recall what Kept remembers about the user, semantically. Hybrid retrieval (meaning + keyword + recency + salience) over their long-term memory. Use for 'what does Kept know about my training / my routines / my coach'.",
+      "requiredScopes": [
+        "memory:read"
+      ],
+      "annotations": {
+        "title": "Recall from memory",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What to recall about the user"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20,
+            "description": "Max memories (default 8)"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_whoami",
+      "title": "Who am I",
+      "description": "Read the user's basic context: display name, timezone, and declared life areas. Resolve relative dates against this timezone. Minimal — no email or sensitive profile data.",
+      "requiredScopes": [
+        "profile:read"
+      ],
+      "annotations": {
+        "title": "Who am I",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_search_docs",
+      "title": "Search Kept documentation",
+      "description": "Search Kept's verified product documentation for grounded answers about features, setup, privacy, billing, Apple apps, MCP, and Kept Workplace.",
+      "requiredScopes": [
+        "profile:read"
+      ],
+      "annotations": {
+        "title": "Search Kept documentation",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 500,
+            "description": "The question about Kept"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8,
+            "default": 5
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_route",
+      "title": "Route a capture (no write)",
+      "description": "Classify a free-form line into the right kind (task, event, or note) with the user's full context — areas, priority, dates — and return the structured decision WITHOUT writing anything. Use when you want Kept's categorization but will decide yourself.",
+      "requiredScopes": [
+        "capture"
+      ],
+      "annotations": {
+        "title": "Route a capture (no write)",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The raw line to classify"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "today": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_capture",
+      "title": "Capture and file",
+      "description": "Capture a quick line and let Kept file it as the right task, event, or note in the user's system — threaded to the right life area, and committed. The hero: 'log this to Kept'. Set dry_run to preview the routing without writing.",
+      "requiredScopes": [
+        "capture"
+      ],
+      "annotations": {
+        "title": "Capture and file",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The line to capture, e.g. 'call the plumber Tuesday'"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "today": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the routing decision without writing"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_create_task",
+      "title": "Create a task",
+      "description": "Create a task (something the user must do, with no fixed meeting time). Threads it to the matching life-area goal automatically. Use when you already know it's a task.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Create a task",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "area": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "none",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "due": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Due date YYYY-MM-DD"
+          },
+          "why": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "assignee": {
+            "type": "string",
+            "enum": [
+              "owner",
+              "this_client"
+            ]
+          },
+          "ask": {
+            "type": "object",
+            "properties": {
+              "ask": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 140
+              },
+              "done_looks_like": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 280
+              },
+              "est_minutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 480
+              },
+              "needed_by": {
+                "type": "string",
+                "format": "date"
+              },
+              "placement": {
+                "type": "string",
+                "enum": [
+                  "backlog",
+                  "quick_win",
+                  "today"
+                ]
+              },
+              "resource_note_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "resource_urls": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\/\\/\\S+$",
+                  "maxLength": 2048
+                }
+              },
+              "idempotency_key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "ask",
+              "done_looks_like",
+              "idempotency_key"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_complete_task",
+      "title": "Complete a task",
+      "description": "Mark one of the user's tasks done by id (find it first with kept_list_tasks). Leaves a visible receipt on the task, since the person isn't watching this happen.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Complete a task",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_assign_task",
+      "title": "Assign this app's task",
+      "description": "Hand back or take on a task this exact connection created. Tasks created by the person or another connection cannot be reassigned here.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Assign this app's task",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "assignee": {
+            "type": "string",
+            "enum": [
+              "owner",
+              "this_client"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "assignee"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_ask",
+      "title": "Update this app's ask",
+      "description": "Revise once or withdraw an ask this connected app made. The asking connection is derived from the token, never an argument.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Update this app's ask",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ask_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ask": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 140
+          },
+          "done_looks_like": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 280
+          },
+          "est_minutes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 480
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "needed_by": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "withdraw": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ask_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_log_note",
+      "title": "Log a note",
+      "description": "Save a note (a thought, idea, or reference) with an optional title and life-area folder. The fast-path for when you already know it's a note.",
+      "requiredScopes": [
+        "notes:write"
+      ],
+      "annotations": {
+        "title": "Log a note",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20000
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "folder_area": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_create_event",
+      "title": "Create an event",
+      "description": "Create a calendar event (something at a date/time/place). Writes to Kept and, optionally, a chosen connected calendar. Generate one UUID idempotency_key for the intended event, persist it, and reuse it unchanged for every transport retry.",
+      "requiredScopes": [
+        "calendar:write"
+      ],
+      "annotations": {
+        "title": "Create an event",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Caller-persisted UUID for this intended event. Reuse the same value after a timeout or lost response; a new value means a new event."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "24h HH:MM"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "calendar_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Target calendar id from kept_list_calendars"
+          }
+        },
+        "required": [
+          "idempotency_key",
+          "title",
+          "date"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_complete_habit",
+      "title": "Complete a habit",
+      "description": "Log one of the user's habits as done for a date (find the id with kept_list_habits).",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Complete a habit",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "date"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_create_goal",
+      "title": "Create a goal",
+      "description": "Create a life goal (title, optional north star, why, and life-area domain). For a full plan with habits and check-ins, the user opens the Goal Coach in-app.",
+      "requiredScopes": [
+        "goals:write"
+      ],
+      "annotations": {
+        "title": "Create a goal",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "northStar": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "why": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_remember",
+      "title": "Remember a fact",
+      "description": "Save a durable fact about the user to Kept's long-term memory (e.g. 'evenings are my weak point'). Kept embeds it for future recall.",
+      "requiredScopes": [
+        "memory:write"
+      ],
+      "annotations": {
+        "title": "Remember a fact",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 280
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_forget",
+      "title": "Forget a memory",
+      "description": "Forget a memory by id (find it with kept_recall). This is a reversible soft-archive, not a hard delete — the memory can be restored.",
+      "requiredScopes": [
+        "memory:write"
+      ],
+      "annotations": {
+        "title": "Forget a memory",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Memory id from kept_recall"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_task",
+      "title": "Update a task",
+      "description": "Edit one of the user's tasks: title, priority, due date, area, description, why, or labels. Find the id with kept_list_tasks. Pass only the fields you're changing; pass null for due/area to clear them.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Update a task",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "none",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "due": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYY-MM-DD or null to clear"
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 8000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "why": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "labels": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                "maxItems": 20
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_reopen_task",
+      "title": "Reopen a task",
+      "description": "Reopen a completed task (mark it not done). Find the id with kept_list_tasks.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Reopen a task",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_note",
+      "title": "Update a note",
+      "description": "Edit one of the user's notes: title, body, tags, or life-area folder. Find the id with kept_search_notes. Pass only the fields you're changing.",
+      "requiredScopes": [
+        "notes:write"
+      ],
+      "annotations": {
+        "title": "Update a note",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                "maxItems": 20
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "folder_area": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_event",
+      "title": "Update an event",
+      "description": "Edit one of the user's calendar events: title, date, start/end, location, description, or area. Google-synced events update in Google too. Find the id with kept_check_calendar. Pass start as null for all-day.",
+      "requiredScopes": [
+        "calendar:write"
+      ],
+      "annotations": {
+        "title": "Update an event",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_goal",
+      "title": "Update a goal",
+      "description": "Adjust an existing life goal (title, north star, why, target value/date). Find the id with kept_list_goals.",
+      "requiredScopes": [
+        "goals:write"
+      ],
+      "annotations": {
+        "title": "Update a goal",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "northStar": {
+            "type": "string"
+          },
+          "why": {
+            "type": "string"
+          },
+          "targetValue": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "targetDate": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_set_goal_progress",
+      "title": "Set goal progress",
+      "description": "Record explicitly stated goal progress (0..1) as declared. This replaces its previous progress attribution; it does not measure achievement, complete tasks, or archive the goal. Find the id with kept_list_goals.",
+      "requiredScopes": [
+        "goals:write"
+      ],
+      "annotations": {
+        "title": "Set goal progress",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "progress": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "id",
+          "progress"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_archive_goal",
+      "title": "Archive a goal",
+      "description": "Archive a life goal so it leaves the active list. Reversible (restorable in-app). Prefer this over deleting. Find the id with kept_list_goals.",
+      "requiredScopes": [
+        "goals:write"
+      ],
+      "annotations": {
+        "title": "Archive a goal",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_create_habit",
+      "title": "Create a habit",
+      "description": "Create exactly ONE approved habit. Use kept_list_habits first and update a matching habit instead of duplicating it. New callers should include a stable idempotency key plus the cue, target, worst-day minimum, recovery, and review design; the legacy title/category shape remains supported.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Create a habit",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Caller-persisted UUID reused unchanged for transport retries."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 60
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Morning",
+              "Non-negotiables",
+              "Training",
+              "Evening"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "build",
+              "break"
+            ]
+          },
+          "cadence": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekdays",
+              "weekly",
+              "custom"
+            ]
+          },
+          "anchorCue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ifThen": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "abstinenceStartedOn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "weeklyTarget": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 21
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "metric": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "planNeeded": {
+            "type": "string",
+            "enum": [
+              "none",
+              "running",
+              "training",
+              "nutrition"
+            ]
+          },
+          "targetAction": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "minimumAction": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recoveryPlan": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "celebration": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reviewRule": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reviewAfter": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "designBottleneck": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "capability",
+                  "opportunity",
+                  "motivation",
+                  "mixed",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scheduledTime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Local time of day (24h HH:mm) to place this habit on the calendar. Omit for a sensible default by category."
+          },
+          "showOnCalendar": {
+            "type": "boolean",
+            "description": "Whether the habit appears on the day calendar (default true)."
+          },
+          "goalId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "category"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_habit",
+      "title": "Update a habit",
+      "description": "Adapt an existing habit's complete behavioral design. Use kept_list_habits first, pass only fields that should change, and prefer this over creating a duplicate for the same intention.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Update a habit",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 60
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Morning",
+              "Non-negotiables",
+              "Training",
+              "Evening"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "build",
+              "break"
+            ]
+          },
+          "cadence": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekdays",
+              "weekly",
+              "custom"
+            ]
+          },
+          "anchor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "ifThen": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "abstinenceStartedOn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "weeklyTarget": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 21
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "metric": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "planNeeded": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "running",
+                  "training",
+                  "nutrition"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "goalId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "groupId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "targetAction": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "minimumAction": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "recoveryPlan": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "celebration": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reviewRule": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "reviewAfter": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "designBottleneck": {
+            "type": "string",
+            "enum": [
+              "capability",
+              "opportunity",
+              "motivation",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "scheduledTime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "showOnCalendar": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_create_habit_group",
+      "title": "Create a habit group",
+      "description": "Create a habit group, or return the existing active group when this owner already has the same normalized name. Use kept_list_habit_groups first. Archiving is reversible; there is no delete.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Create a habit group",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_update_habit_group",
+      "title": "Update a habit group",
+      "description": "Rename, archive, or unarchive one habit group. Pass a name and/or archived change; an empty patch is refused. Archiving does not unassign habits. Unique active names are per owner.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Update a habit group",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "allOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          },
+          "archived": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_reorder_habit_groups",
+      "title": "Reorder habit groups",
+      "description": "Reorder active habit groups. ids must be a permutation of the current active catalog. Positions are written one at a time and are not an atomic reorder.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Reorder habit groups",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "maxItems": 10000
+          }
+        },
+        "required": [
+          "ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_archive_habit",
+      "title": "Archive a habit",
+      "description": "Archive a habit so it no longer shows in the daily protocol. Reversible (its history is kept). Prefer over deleting. Find the id with kept_list_habits.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Archive a habit",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_uncomplete_habit",
+      "title": "Uncomplete a habit",
+      "description": "Unmark a habit for a date (logged done by mistake). Find the id with kept_list_habits.",
+      "requiredScopes": [
+        "habits:write"
+      ],
+      "annotations": {
+        "title": "Uncomplete a habit",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "required": [
+          "id",
+          "date"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_now",
+      "title": "What should I do now",
+      "description": "What the user should do right now — Kept's 'Now' brief with the engine's reasoning. Returns the latest brief; when missing/stale (or regenerate=true) it generates a fresh one via the LLM and caches it (a 45s burst guard avoids redundant generation). On a brand-new or fully-cleared account it skips the LLM and returns a friendly empty state instead.",
+      "requiredScopes": [
+        "plan:read"
+      ],
+      "annotations": {
+        "title": "What should I do now",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "regenerate": {
+            "type": "boolean",
+            "description": "Force a fresh brief"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_prioritize_day",
+      "title": "Prioritize the day",
+      "description": "Kept's prioritized plan for a day — a Do-first list and Deep-work blocks chosen from the user's open tasks, each with a reason. Generates and caches the plan via the LLM; does NOT change the user's tasks (only the derived daily_plans row).",
+      "requiredScopes": [
+        "plan:read"
+      ],
+      "annotations": {
+        "title": "Prioritize the day",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Defaults to today in the user's timezone"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_briefing",
+      "title": "Get the briefing",
+      "description": "The composed morning briefing for a date (from the Nightly Engine). Reads the latest if no date is given.",
+      "requiredScopes": [
+        "plan:read"
+      ],
+      "annotations": {
+        "title": "Get the briefing",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_export_tasks",
+      "title": "Export tasks",
+      "description": "Export the user's tasks as JSON or Markdown, filterable by area / done state / due-before, capped and cursor-paginated. The 'export my todos' ask.",
+      "requiredScopes": [
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "Export tasks",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "markdown"
+            ],
+            "description": "Default json"
+          },
+          "area": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "include_done": {
+            "type": "boolean"
+          },
+          "due_before": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "cursor": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Row offset for the next page"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_events",
+      "title": "List events",
+      "description": "List the user's calendar events in a date range, paginated. Returns safe fields only (no attendee emails, external ids, or sync metadata).",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "List events",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "cursor": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_memories",
+      "title": "List memories",
+      "description": "List the user's salient long-term memories (most weighted first). For semantic recall on a topic, use kept_recall instead.",
+      "requiredScopes": [
+        "memory:read"
+      ],
+      "annotations": {
+        "title": "List memories",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_append_daily_note",
+      "title": "Append to daily note",
+      "description": "Append a line to today's daily note (get-or-create on the user's logical day). The 'jot this in today's note' fast-path.",
+      "requiredScopes": [
+        "notes:write"
+      ],
+      "annotations": {
+        "title": "Append to daily note",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8000
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_search",
+      "title": "Search Kept",
+      "description": "Search across the user's notes (full-text) and open tasks (title match) at once — 'find anything in my Kept'. For meaning-shaped note queries ('the pricing decision'), prefer kept_search_notes_semantic.",
+      "requiredScopes": [
+        "notes:read",
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "Search Kept",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_search_notes_semantic",
+      "title": "Search notes by meaning",
+      "description": "Search the user's notes BY MEANING (semantic + keyword). Prefer this over kept_search_notes: it finds 'the pricing decision' even when the note said 'per-seat ceiling'. Returns the matching blocks in the user's own words.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Search notes by meaning",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What to find, in plain language"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "work",
+                  "personal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Restrict to the work or personal side"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_notes_about",
+      "title": "Thread / dossier",
+      "description": "Assemble everything the user ever noted about a person, project, goal, or topic — the auto-built thread/dossier, time-ordered. Use for 'what's the latest on Aisha' or 'everything about the Acme renewal'. The user never filed this; it gathered itself.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Thread / dossier",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The person/project/goal/topic name"
+          },
+          "kind": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "person",
+                  "project",
+                  "goal",
+                  "topic",
+                  "decision",
+                  "date",
+                  "place",
+                  "org"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "work",
+                  "personal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_related_notes",
+      "title": "Related notes",
+      "description": "Given a note id, surface the few past notes most related to it (they share a person/project/topic). The scoped 'related' view, never a whole-vault graph.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Related notes",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "note uuid"
+          }
+        },
+        "required": [
+          "note_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_decisions_about",
+      "title": "Decisions about",
+      "description": "Recall the DECISIONS the user recorded about a project, topic, or person — newest first, with the verbatim rationale. Use for 'why did we go with X' / 'why didn't we pick A'; keyword search can't find these (the note said 'relational shape', not 'Mongo').",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Decisions about",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The project/topic/person the decision was about"
+          },
+          "kind": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "person",
+                  "project",
+                  "goal",
+                  "topic",
+                  "decision",
+                  "date",
+                  "place",
+                  "org"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "work",
+                  "personal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_threads",
+      "title": "List threads",
+      "description": "List the user's auto-built note threads (entities): People, Projects, Goals, Decisions, and more, salience-ranked. Discover which entities exist before drilling in with kept_notes_about or kept_decisions_about.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "List threads",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "person",
+                  "project",
+                  "goal",
+                  "topic",
+                  "decision",
+                  "date",
+                  "place",
+                  "org"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Restrict to one lens, e.g. person or project"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "work",
+                  "personal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Default 60"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_note_chips",
+      "title": "Note chips",
+      "description": "Read a note's chips — the entities the Structurer linked to it, with confidence and auto/manual source. The 'what does Kept think this note is about' view.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Note chips",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "note uuid"
+          }
+        },
+        "required": [
+          "note_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_note_templates",
+      "title": "List note templates",
+      "description": "List the user's note-template library: the curated seed templates plus their own promoted ones (name, shape, triggers, category — not the full skeletons).",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "List note templates",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_note_folders",
+      "title": "List note folders",
+      "description": "List the user's note folders (id + name) for filing notes.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "List note folders",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_move_note_to_folder",
+      "title": "Move note to folder",
+      "description": "File one of the user's notes into one of their folders. Find the folder id with kept_list_note_folders and the note id with kept_search_notes.",
+      "requiredScopes": [
+        "notes:write"
+      ],
+      "annotations": {
+        "title": "Move note to folder",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "folder_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "note_id",
+          "folder_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_link_note_to_task",
+      "title": "Link note to task",
+      "description": "Attach one of the user's notes to one of their tasks, so the note shows as reference on the task.",
+      "requiredScopes": [
+        "notes:write"
+      ],
+      "annotations": {
+        "title": "Link note to task",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "task_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "note_id",
+          "task_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_read_daily_note",
+      "title": "Read the daily note",
+      "description": "Read the user's daily note for a date (today by default, in their timezone). Read-only: returns exists=false if the day has no note yet — use kept_append_daily_note to start one.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Read the daily note",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "The daily note's local date; defaults to today"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_note_blocks_read",
+      "title": "Read note blocks",
+      "description": "Read one of the user's notes as blocks — every paragraph, heading, checkbox, and list item with its own id, type, and nesting. Call this before kept_note_blocks_edit, which addresses blocks by these ids. Long notes come back a page at a time: pass the next_cursor you were given, or block_id to read one section and what is under it.",
+      "requiredScopes": [
+        "notes:read"
+      ],
+      "annotations": {
+        "title": "Read note blocks",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "block_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cursor": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 200
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "note_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_note_blocks_edit",
+      "title": "Edit note blocks",
+      "description": "Change part of one of the user's notes, leaving every other block exactly as they wrote it, ids included. Operations: insert_after, insert_before, replace, delete, and move, applied in order as one atomic edit — if any one of them cannot be placed, none of them are and nothing is written. Read the note with kept_note_blocks_read first and use the ids it gave you; never guess one. Prefer this over kept_update_note for anything short of a rewrite the person actually asked for.",
+      "requiredScopes": [
+        "notes:write"
+      ],
+      "annotations": {
+        "title": "Edit note blocks",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ops": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "insert_after"
+                    },
+                    "anchor_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "block": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "text": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "t": {
+                                "type": "string"
+                              },
+                              "marks": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "bold",
+                                    "italic",
+                                    "underline",
+                                    "strike",
+                                    "mark",
+                                    "code",
+                                    "link"
+                                  ]
+                                }
+                              },
+                              "href": {
+                                "type": "string"
+                              },
+                              "color": {
+                                "type": "string",
+                                "enum": [
+                                  "ink",
+                                  "sage",
+                                  "clay",
+                                  "sky",
+                                  "blush",
+                                  "mist"
+                                ]
+                              },
+                              "refs": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "t"
+                            ],
+                            "additionalProperties": true
+                          }
+                        },
+                        "raw": {
+                          "type": "string"
+                        },
+                        "attrs": {
+                          "type": "object",
+                          "additionalProperties": {}
+                        },
+                        "children": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "markDefs": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "href": {
+                                "type": "string"
+                              },
+                              "entity_id": {
+                                "type": "string"
+                              },
+                              "doc_id": {
+                                "type": "string"
+                              },
+                              "block_id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "kind"
+                            ],
+                            "additionalProperties": true
+                          }
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "additionalProperties": true
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "anchor_id",
+                    "block"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "insert_before"
+                    },
+                    "anchor_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "block": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "text": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "t": {
+                                "type": "string"
+                              },
+                              "marks": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "bold",
+                                    "italic",
+                                    "underline",
+                                    "strike",
+                                    "mark",
+                                    "code",
+                                    "link"
+                                  ]
+                                }
+                              },
+                              "href": {
+                                "type": "string"
+                              },
+                              "color": {
+                                "type": "string",
+                                "enum": [
+                                  "ink",
+                                  "sage",
+                                  "clay",
+                                  "sky",
+                                  "blush",
+                                  "mist"
+                                ]
+                              },
+                              "refs": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "t"
+                            ],
+                            "additionalProperties": true
+                          }
+                        },
+                        "raw": {
+                          "type": "string"
+                        },
+                        "attrs": {
+                          "type": "object",
+                          "additionalProperties": {}
+                        },
+                        "children": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "markDefs": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "href": {
+                                "type": "string"
+                              },
+                              "entity_id": {
+                                "type": "string"
+                              },
+                              "doc_id": {
+                                "type": "string"
+                              },
+                              "block_id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "kind"
+                            ],
+                            "additionalProperties": true
+                          }
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "additionalProperties": true
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "anchor_id",
+                    "block"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "replace"
+                    },
+                    "block_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "block": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "text": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "t": {
+                                "type": "string"
+                              },
+                              "marks": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "bold",
+                                    "italic",
+                                    "underline",
+                                    "strike",
+                                    "mark",
+                                    "code",
+                                    "link"
+                                  ]
+                                }
+                              },
+                              "href": {
+                                "type": "string"
+                              },
+                              "color": {
+                                "type": "string",
+                                "enum": [
+                                  "ink",
+                                  "sage",
+                                  "clay",
+                                  "sky",
+                                  "blush",
+                                  "mist"
+                                ]
+                              },
+                              "refs": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "t"
+                            ],
+                            "additionalProperties": true
+                          }
+                        },
+                        "raw": {
+                          "type": "string"
+                        },
+                        "attrs": {
+                          "type": "object",
+                          "additionalProperties": {}
+                        },
+                        "children": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "markDefs": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "href": {
+                                "type": "string"
+                              },
+                              "entity_id": {
+                                "type": "string"
+                              },
+                              "doc_id": {
+                                "type": "string"
+                              },
+                              "block_id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "kind"
+                            ],
+                            "additionalProperties": true
+                          }
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "additionalProperties": true
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "block_id",
+                    "block"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "delete"
+                    },
+                    "block_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "block_id"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "move"
+                    },
+                    "block_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "parent_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "after_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "block_id"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 50
+          }
+        },
+        "required": [
+          "note_id",
+          "ops"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_subtasks",
+      "title": "List subtasks",
+      "description": "List the checklist items (subtasks) on one of the user's tasks. Find the task id with kept_list_tasks.",
+      "requiredScopes": [
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "List subtasks",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_add_subtask",
+      "title": "Add a subtask",
+      "description": "Add a checklist item (subtask) to one of the user's tasks. Find the task id with kept_list_tasks.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Add a subtask",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "task_id",
+          "title"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_set_subtask_done",
+      "title": "Set subtask done",
+      "description": "Check or uncheck a subtask. Find the id with kept_list_subtasks.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Set subtask done",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "done": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "done"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_task_comments",
+      "title": "List task comments",
+      "description": "Read the comments on one of the user's tasks. Find the task id with kept_list_tasks.",
+      "requiredScopes": [
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "List task comments",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_add_task_comment",
+      "title": "Add a task comment",
+      "description": "Add a comment to one of the user's tasks (a status update, context, a note-to-self). Attributed to Kept. Find the task id with kept_list_tasks.",
+      "requiredScopes": [
+        "tasks:write"
+      ],
+      "annotations": {
+        "title": "Add a task comment",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "task_id",
+          "body"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_event_details",
+      "title": "Event details",
+      "description": "Read one event in full: who's invited, their replies, the organizer, the user's own RSVP, and whether it's shareable (on a connected Google calendar). Use before inviting or replying. Find the id with kept_check_calendar.",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "Event details",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_invite_to_event",
+      "title": "Invite to event",
+      "description": "Invite people to one of the user's events. Stages a Google invite the user confirms in Kept before anyone is emailed. Only works on events on a connected Google calendar (check kept_event_details · shareable). Never guess ids.",
+      "requiredScopes": [
+        "calendar:write"
+      ],
+      "annotations": {
+        "title": "Invite to event",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attendees": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "minLength": 3,
+                  "description": "The person's email address"
+                },
+                "name": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 120
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "optional": {
+                  "type": "boolean",
+                  "description": "True for an optional guest"
+                }
+              },
+              "required": [
+                "email"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 10
+          }
+        },
+        "required": [
+          "event_id",
+          "attendees"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_rsvp_event",
+      "title": "RSVP to event",
+      "description": "Reply to an event the user was invited to (accept, maybe, or decline). Stages the RSVP for the user to confirm in Kept, since it notifies the organizer. Works on events from a connected Google calendar. Find the id with kept_check_calendar.",
+      "requiredScopes": [
+        "calendar:write"
+      ],
+      "annotations": {
+        "title": "RSVP to event",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "response": {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "tentative",
+              "declined"
+            ]
+          }
+        },
+        "required": [
+          "event_id",
+          "response"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_move_event_to_calendar",
+      "title": "Move event to calendar",
+      "description": "Move one of the user's events to a different calendar of their own (e.g. Personal to Work). Immediate; emails no one. Find the target id with kept_list_calendars and the event id with kept_check_calendar.",
+      "requiredScopes": [
+        "calendar:write"
+      ],
+      "annotations": {
+        "title": "Move event to calendar",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "calendar_id": {
+            "type": "string",
+            "description": "Target calendar id from kept_list_calendars"
+          }
+        },
+        "required": [
+          "event_id",
+          "calendar_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_focus_sessions",
+      "title": "List focus sessions",
+      "description": "List the user's focus sessions started in a date range (label, mode, minutes, completed), paginated. The 'how much deep work did I do this week' read.",
+      "requiredScopes": [
+        "plan:read"
+      ],
+      "annotations": {
+        "title": "List focus sessions",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "cursor": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Row offset for the next page"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_weight_trend",
+      "title": "Get the weight trend",
+      "description": "Read the user's weight readings over a date range, with Monday-based weekly averages already computed. Use this for questions about weight progress. Day-to-day swings can mislead, so prefer the weekly average. Ranges longer than 370 days are refused rather than silently truncated.",
+      "requiredScopes": [
+        "health:read"
+      ],
+      "annotations": {
+        "title": "Get the weight trend",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "First day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last day of the range, inclusive (YYYY-MM-DD)"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_sleep_range",
+      "title": "Get sleep over a range",
+      "description": "Read the user's nightly sleep over a date range, including time asleep, efficiency, awakenings, deep and REM sleep, Kept's score, and weekly averages. Use this for sleep patterns; kept_get_today gives only one night.",
+      "requiredScopes": [
+        "health:read"
+      ],
+      "annotations": {
+        "title": "Get sleep over a range",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "First day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last day of the range, inclusive (YYYY-MM-DD)"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_mood_range",
+      "title": "Get mood over a range",
+      "description": "Read the mood the user logged over a date range, with weekly averages. Use this for mood patterns or to compare a felt claim with what they recorded.",
+      "requiredScopes": [
+        "health:read"
+      ],
+      "annotations": {
+        "title": "Get mood over a range",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "First day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last day of the range, inclusive (YYYY-MM-DD)"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_habit_history",
+      "title": "Get habit history",
+      "description": "Read the user's habit log over a date range with per-habit adherence already calculated. Pass a habit_id for one habit or omit it for all. Adherence uses days with log rows, so compare logged_days with the range before treating an unlogged day as a miss.",
+      "requiredScopes": [
+        "habits:read"
+      ],
+      "annotations": {
+        "title": "Get habit history",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "habit_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "One habit id from kept_list_habits, or omit for every habit"
+          },
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "First day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last day of the range, inclusive (YYYY-MM-DD)"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_metric_series",
+      "title": "Get a metric series",
+      "description": "Read the history of one metric the user tracks, including its target, direction, and weekly averages. Use its lower_snake_case key. An unknown key returns an explicit error rather than an empty series.",
+      "requiredScopes": [
+        "health:read"
+      ],
+      "annotations": {
+        "title": "Get a metric series",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "metric_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "description": "The metric's lower_snake_case key"
+          },
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "First day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last day of the range, inclusive (YYYY-MM-DD)"
+          }
+        },
+        "required": [
+          "metric_key",
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_search_tasks",
+      "title": "Search tasks",
+      "description": "Search the user's task titles by keyword, including completed tasks by default. Use when they name a specific task; kept_list_tasks only returns open tasks and cannot establish whether something was completed.",
+      "requiredScopes": [
+        "tasks:read"
+      ],
+      "annotations": {
+        "title": "Search tasks",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Words from the task title"
+          },
+          "include_done": {
+            "type": "boolean",
+            "description": "Include completed tasks, default true"
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional life-area key from kept_list_areas"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "description": "Maximum matches, default 20"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_find_free_slots",
+      "title": "Find free slots",
+      "description": "Find openings of a given length in the user's working hours across a date range, combining connected-calendar free/busy with Kept events. Read-only: it books nothing. Check unanswered_calendars and unauthorized_accounts because a slot is only as certain as the calendars that answered.",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "Find free slots",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "First day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last day of the range, inclusive (YYYY-MM-DD)"
+          },
+          "duration_minutes": {
+            "type": "integer",
+            "minimum": 5,
+            "maximum": 1440,
+            "description": "Required meeting length"
+          },
+          "working_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Earliest local time, 24h HH:MM, default 09:00"
+          },
+          "working_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Latest local end, 24h HH:MM, default 17:00"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "description": "Maximum slots, default 6"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone; defaults to the user's profile"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "duration_minutes"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_event_guests",
+      "title": "Get event guest replies",
+      "description": "Read invitation responses for one event or across at most 31 days of meetings. Returns accepted, declined, tentative, and awaiting replies plus organizer status. Read-only: it uses the last calendar sync, sends no email, changes no RSVP, and never explains why someone did or did not answer.",
+      "requiredScopes": [
+        "calendar:read"
+      ],
+      "annotations": {
+        "title": "Get event guest replies",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": false,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "One event id from kept_check_calendar, or omit to sweep a range"
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "First day of a range sweep, inclusive"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Last day of a range sweep, inclusive, at most 31 days"
+          },
+          "organized_by_them_only": {
+            "type": "boolean",
+            "description": "For range sweeps, include only meetings the user organizes, default true"
+          },
+          "awaiting_only": {
+            "type": "boolean",
+            "description": "For range sweeps, include only meetings awaiting at least one reply"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_create_job",
+      "title": "Create a job",
+      "description": "Create a Cloud Agents job for Kept to work on: an outcome (title + objective), not a to-do. Runs against your default agent unless you pass agent_id. Kept performs Class 0/1 actions (read-only or reversible, Kept-owned) automatically; anything higher-risk pauses for your approval, never performed by this tool itself. Find the job's progress with kept_get_job. Sensitive-context grants are not settable over MCP; a job created here starts with none.",
+      "requiredScopes": [
+        "jobs:write"
+      ],
+      "annotations": {
+        "title": "Create a job",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "defaultOff": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "objective": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000,
+            "description": "The outcome the job should reach, in your own words"
+          },
+          "agent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An existing agent id you own; omit to use your default agent"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "ISO 8601 datetime the job is due"
+          },
+          "budget_usd": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "budget_minutes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1440
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "objective"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_job",
+      "title": "Get a job",
+      "description": "Read one Cloud Agents job's current state: title, objective, assigned agent, lifecycle status, and its most recent run's status. Find the id with kept_list_jobs.",
+      "requiredScopes": [
+        "jobs:read"
+      ],
+      "annotations": {
+        "title": "Get a job",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_list_jobs",
+      "title": "List jobs",
+      "description": "List your Cloud Agents jobs, most recently created first, each paired with its latest run's status and pending-approval count.",
+      "requiredScopes": [
+        "jobs:read"
+      ],
+      "annotations": {
+        "title": "List jobs",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "description": "Max jobs to return (default 20)"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_get_run_events",
+      "title": "Get run events",
+      "description": "Read a job run's normalized event timeline in order: state changes, tool calls, artifacts. User-visible events only, never raw model reasoning or provider traces. Find the run id with kept_get_job or kept_list_jobs.",
+      "requiredScopes": [
+        "jobs:read"
+      ],
+      "annotations": {
+        "title": "Get run events",
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "defaultOff": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "job_run_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Max events to return (default 100)"
+          }
+        },
+        "required": [
+          "job_run_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kept_submit_approval",
+      "title": "Decide an approval",
+      "description": "Decide a pending Kept approval by id. Requires echoing the exact parameter_hash you read (from kept_get_run_events or the Kept app); a stale or wrong hash is refused, never re-hashed for you. Class 3 (high-consequence) approvals can only be approved inside the Kept app, where the type-back confirmation is real; over MCP you may only reject a Class 3 approval or leave it for the user. Class 2 approvals may be approved, edited and approved, or rejected.",
+      "requiredScopes": [
+        "approvals:write"
+      ],
+      "annotations": {
+        "title": "Decide an approval",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "defaultOff": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "approval_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "edited_and_approved",
+              "rejected"
+            ]
+          },
+          "parameter_hash": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Must exactly match the approval's current parameter_hash"
+          },
+          "edits": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Only meaningful when decision = edited_and_approved"
+          }
+        },
+        "required": [
+          "approval_id",
+          "decision",
+          "parameter_hash"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "deploymentVerification": "catalog/deployment-verification.json"
+}
